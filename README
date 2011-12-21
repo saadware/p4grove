@@ -1,0 +1,19 @@
+p4grove
+
+Intro:
+A simple perforce trigger that posts depot commit notifications to channels
+in the grove.io irc network. Python is required.
+
+Usage:
+Create a perforce trigger, pointing it to the provided script and pass in 
+the required arguments. 
+
+Example:
+The following is an example of a Perforce trigger that uses
+
+	Triggers:
+		groveChangePost change-commit //... "python /p4_triggers/OnCommit-PostIRCGrove.py %change% %serverport% guest-service"
+
+The arguments are the changelist number, the perforce server (server:port)
+and the user name to run the perforce command as. The user must have at 
+least 'review' permissions.
