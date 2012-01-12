@@ -21,7 +21,7 @@ def main():
 			"--botName", 
 			action="store", 
 			dest="botName",
-			default="P4Bot",
+			default="p4Bot",
 			help="name of Bot that displays on grove channel")
 	(options, args) = parser.parse_args()
 
@@ -57,12 +57,15 @@ def main():
 
 	# extract information and build up our irc message to post to grove
 	p4User = cl[0]['user']
-	msg = "p4 commit: %s submitted change %s" % (p4User, change)
+	msg = "%s submitted change %s" % (p4User, change)
 	if options.p4WebUrl != None:
 		msg = "%s (%s/%s?ac=10)" % (msg, options.p4WebUrl, change)
-	p4Desc = cl[0]['desc']
+	# for the description, remove any newlines and trim if too long
+	p4Desc = ' '.join( cl[0]['desc'].splitlines() )
 	p4Desc = p4Desc[0: 480 - len(msg)]
-	msg = "%s : '%s'" % (msg, p4Desc)
+
+	# our final message to send
+	msg = "%s : %s" % (msg, p4Desc)
 
 	# these are the data pieces the grove API exposes; init and encode
 	groveValues = { 'service': options.botName, 
