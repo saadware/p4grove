@@ -1,3 +1,8 @@
+########################################################################
+# Copyright (c) 2012,2013 Scott Saad
+# 
+# See the file license.txt for copying permission.
+########################################################################
 import sys
 import urllib
 import urllib2
